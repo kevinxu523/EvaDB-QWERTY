@@ -1,0 +1,12 @@
+{
+  "combiner.bn_momentum": 0.2,
+  "combiner.bn_virtual_bs": 1024,
+  "combiner.num_steps": 7,
+  "combiner.output_size": 24,
+  "combiner.relaxation_factor": 2.0,
+  "combiner.size": 8,
+  "combiner.sparsity": 0.001,
+  "trainer.learning_rate": 3.674835115950602e-05,
+  "trainer.learning_rate_scheduler.decay_rate": 0.95,
+  "trainer.learning_rate_scheduler.decay_steps": 2000
+}

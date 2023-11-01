@@ -1,0 +1,3 @@
+:actor_name:run_experiment_trial
+/home/kevinxu523/Desktop/projectEva/evadb-venv/lib/python3.10/site-packages/ludwig/schema/model_types/utils.py:238: UserWarning: Can't utilize `early_stop` while using a hyperopt scheduler. Setting early stop to -1.
+  warnings.warn("Can't utilize `early_stop` while using a hyperopt scheduler. Setting early stop to -1.")

@@ -1,0 +1,194 @@
+{
+    "active_member": {
+        "preprocessing": {
+            "computed_fill_value": 0,
+            "fallback_true_label": null,
+            "fill_value": null,
+            "missing_value_strategy": "fill_with_false"
+        }
+    },
+    "age": {
+        "mean": 38.92179870605469,
+        "preprocessing": {
+            "computed_fill_value": 0.0,
+            "computed_outlier_fill_value": 0.0,
+            "fill_value": 0.0,
+            "missing_value_strategy": "fill_with_const",
+            "normalization": "zscore",
+            "outlier_strategy": null,
+            "outlier_threshold": 3.0
+        },
+        "std": 10.48780632019043
+    },
+    "balance": {
+        "mean": 76485.890625,
+        "preprocessing": {
+            "computed_fill_value": 0.0,
+            "computed_outlier_fill_value": 0.0,
+            "fill_value": 0.0,
+            "missing_value_strategy": "fill_with_const",
+            "normalization": "zscore",
+            "outlier_strategy": null,
+            "outlier_threshold": 3.0
+        },
+        "std": 62397.40625
+    },
+    "checksum": "Mqnof_ywM_7PLpD06HXs4g==",
+    "churn": {
+        "preprocessing": {
+            "computed_fill_value": null,
+            "fallback_true_label": null,
+            "fill_value": null,
+            "missing_value_strategy": "drop_row"
+        }
+    },
+    "country": {
+        "idx2str": [
+            "France",
+            "Germany",
+            "Spain"
+        ],
+        "preprocessing": {
+            "cache_encoder_embeddings": false,
+            "computed_fill_value": "<UNK>",
+            "fill_value": "<UNK>",
+            "lowercase": false,
+            "missing_value_strategy": "fill_with_const",
+            "most_common": 10000
+        },
+        "str2freq": {
+            "France": 5014,
+            "Germany": 2509,
+            "Spain": 2477
+        },
+        "str2idx": {
+            "France": 0,
+            "Germany": 1,
+            "Spain": 2
+        },
+        "vocab_size": 3
+    },
+    "credit_card": {
+        "preprocessing": {
+            "computed_fill_value": 0,
+            "fallback_true_label": null,
+            "fill_value": null,
+            "missing_value_strategy": "fill_with_false"
+        }
+    },
+    "credit_score": {
+        "mean": 650.52880859375,
+        "preprocessing": {
+            "computed_fill_value": 0.0,
+            "computed_outlier_fill_value": 0.0,
+            "fill_value": 0.0,
+            "missing_value_strategy": "fill_with_const",
+            "normalization": "zscore",
+            "outlier_strategy": null,
+            "outlier_threshold": 3.0
+        },
+        "std": 96.6532974243164
+    },
+    "gender": {
+        "idx2str": [
+            "Male",
+            "Female"
+        ],
+        "preprocessing": {
+            "cache_encoder_embeddings": false,
+            "computed_fill_value": "<UNK>",
+            "fill_value": "<UNK>",
+            "lowercase": false,
+            "missing_value_strategy": "fill_with_const",
+            "most_common": 10000
+        },
+        "str2freq": {
+            "Female": 4543,
+            "Male": 5457
+        },
+        "str2idx": {
+            "Female": 1,
+            "Male": 0
+        },
+        "vocab_size": 2
+    },
+    "products_number": {
+        "idx2str": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ],
+        "preprocessing": {
+            "cache_encoder_embeddings": false,
+            "computed_fill_value": "<UNK>",
+            "fill_value": "<UNK>",
+            "lowercase": false,
+            "missing_value_strategy": "fill_with_const",
+            "most_common": 10000
+        },
+        "str2freq": {
+            "1": 5084,
+            "2": 4590,
+            "3": 266,
+            "4": 60
+        },
+        "str2idx": {
+            "1": 0,
+            "2": 1,
+            "3": 2,
+            "4": 3
+        },
+        "vocab_size": 4
+    },
+    "tenure": {
+        "idx2str": [
+            "2",
+            "1",
+            "7",
+            "8",
+            "5",
+            "3",
+            "4",
+            "9",
+            "6",
+            "10",
+            "0"
+        ],
+        "preprocessing": {
+            "cache_encoder_embeddings": false,
+            "computed_fill_value": "<UNK>",
+            "fill_value": "<UNK>",
+            "lowercase": false,
+            "missing_value_strategy": "fill_with_const",
+            "most_common": 10000
+        },
+        "str2freq": {
+            "0": 413,
+            "1": 1035,
+            "10": 490,
+            "2": 1048,
+            "3": 1009,
+            "4": 989,
+            "5": 1012,
+            "6": 967,
+            "7": 1028,
+            "8": 1025,
+            "9": 984
+        },
+        "str2idx": {
+            "0": 10,
+            "1": 1,
+            "10": 9,
+            "2": 0,
+            "3": 5,
+            "4": 6,
+            "5": 4,
+            "6": 8,
+            "7": 2,
+            "8": 3,
+            "9": 7
+        },
+        "vocab_size": 11
+    }
+}
