@@ -1,9 +1,14 @@
 # Import the EvaDB package
 import evadb
 import streamlit as st
+import os
+import pandas as pd
 
 # Connect to EvaDB and get a database cursor for running queries
 cursor = evadb.connect().cursor()
+
+openai_key = "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"
+os.environ['OPENAI_KEY'] = openai_key
 
 
 st.title("QWERTY Churn Predictor")
@@ -20,7 +25,7 @@ balance = st.sidebar.slider("Account Balance", min_value=0, max_value=250000)
 products_number = st.sidebar.slider("Number of Products", min_value=1, max_value=4)
 credit_card = st.sidebar.slider("Does the customer have a credit card? 0 for no, 1 for yes", min_value=0, max_value=1)
 active_member = st.sidebar.slider("Is the customer an active member? 0 for no, 1 for yes", min_value=0, max_value=1)
-
+global summary
 # Create a dictionary to store value
 prediction_params = {
     "credit_score": credit_score,
@@ -46,6 +51,56 @@ new_data = {
     "active_member": 1
 }
 
+
+def summarize_data(credit_score, country, gender, age, tenure, balance, products_number, credit_card, active_member, churn):
+    # Compile inputs into a formatted string
+    input_str = (
+        f"This is the inputs: credit score = {credit_score}, country = {country}, gender = {gender}, age = {age}, tenure = {tenure}, "
+        f"balance = {balance}, products_number = {products_number}, credit_card = {credit_card}, "
+        f"active_member = {active_member}"
+    )
+    output_str = f"Output: Likelihood to stay = {churn}"
+    final_str = input_str + " " + output_str
+    df = pd.DataFrame([{"summary": final_str}])
+    df.to_csv("summary.csv")
+    cursor.drop_table("Summary", if_exists=True).execute()
+    cursor.query(
+            """CREATE TABLE IF NOT EXISTS Summary (summary TEXT(5000));"""
+    ).execute()
+    cursor.query("""LOAD CSV 'summary.csv' INTO Summary""").execute()
+
+    data = cursor.query("SELECT summary FROM Summary LIMIT 1;").df()
+
+    summary = data["summary.summary"][0]
+
+    gpt_answer = chat_GPT("In the context of bank customer data, explain why the churn is what it is.  Give the most impactful factors, and advice if the churn is false.  Make the response short.")
+    return gpt_answer
+
+def chatbot_question(question):
+    # Compile inputs into a formatted string
+
+    data = cursor.query("SELECT summary FROM Summary LIMIT 1;").df()
+
+    summary = data["summary.summary"][0]
+
+    gpt_answer = chat_GPT_chatbot(f"In the context of bank customer data, please answer this question: {question}")
+    return gpt_answer
+
+def chat_GPT_chatbot(question):
+    answer_query = cursor.table("Answer").select(
+            f"""ChatGPT('{question}', answer)"""
+    )
+    answer = answer_query.df()["chatgpt.response"][0]
+    return answer
+
+def chat_GPT(question):
+    answer_query = cursor.table("Summary").select(
+            f"""ChatGPT('{question}', summary)"""
+    )
+    answer = answer_query.df()["chatgpt.response"][0]
+    return answer
+
+
 if st.button("Load csv"):
     cursor.query("""CREATE TABLE IF NOT EXISTS 
     customers_data 
@@ -67,7 +122,8 @@ if st.button("Load csv"):
 
 
 
-if st.button("Predict"):
+
+if st.checkbox("Predict"):
 
     #input_data will be reset if it exists
     cursor.query("DROP TABLE IF EXISTS input_data;").execute()
@@ -118,8 +174,23 @@ if st.button("Predict"):
     data = cursor.query("SELECT PredictChurn(*) FROM input_data LIMIT 1;").df()
 
     tf = data['predictchurn.churn_predictions'][0]
+    st.title("Result")
     if tf == False:
         st.write(f"This customer is likely to stop using the bank. Please contact them to discuss their account and how they feel about the bank.")
     else:
         st.success(f"This customer is not likely to stop using the bank!")
+    st.title("Summary Analysis")
+
+    summary = summarize_data(prediction_params['credit_score'], prediction_params['country'], prediction_params['gender'], prediction_params['age'], prediction_params['tenure'], prediction_params['balance'], prediction_params['products_number'], prediction_params['credit_card'], prediction_params['active_member'], tf)
+    st.write(summary)
+
+    user_input = st.text_input("Ask our chatbot inquries! :")
+
+    answer = chatbot_question(user_input)
+    st.write(user_input)
+    st.write(answer)
+
+
+
+
 
