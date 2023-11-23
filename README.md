@@ -30,4 +30,15 @@ pip install -r requirements.txt
 python3 run_evadb.py
 streamlit run "run_evadb.py"
 ```
-# 
+# Usage:
+1. Run load csv to initialize our data for the model
+2. Shift all the desired input parameters for the predicted customer
+3. Check the Predict checkbox
+4. Wait for the prediction model and Summary Analysis to finish running
+5. Prediction and Analysis will be viewable
+6. (Optional) Ask question to chatbot input textbox and press enter
+7. chatBot answer will be viewable
+
+# Example 
+![ProjectQWERTYNotLikely](https://github.com/kevinxu523/EvaDB_Customer_Churn_App/assets/87539469/0ba92ebc-6143-4f7c-8f2e-e8c6728073d0)
+
