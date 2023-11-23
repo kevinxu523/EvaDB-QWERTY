@@ -7,7 +7,7 @@ import pandas as pd
 # Connect to EvaDB and get a database cursor for running queries
 cursor = evadb.connect().cursor()
 
-openai_key = "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"
+openai_key = ""
 os.environ['OPENAI_KEY'] = openai_key
 
 
